@@ -1,9 +1,52 @@
 ---
+import Link from "../components/Link.astro";
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+const projects = [
+  {
+    name: "Departure-board",
+    link: "https://departureboard-jalvsaker.vercel.app",
+    repo: "https://github.com/jalvsaker/departure-board",
+  },
+  {
+    name: "EU-kontroll",
+    link: "https://eukontroll.vercel.app",
+    repo: "https://github.com/jalvsaker/sveltekit-eukontroll",
+  },
+  {
+    name: "PG6301 Exam",
+    link: "https://pg6301exam-1038.onrender.com",
+    repo: "https://github.com/jalvsaker/pg6301exam",
+  },
+];
 ---
 
 <Layout title="jalvsaker">
-  <main>
-    <h1 class="text-2xl">Hello world!</h1>
-  </main>
+  <div class="flex flex-col items-center gap-4">
+    <h1 class="text-2xl font-semibold">jalvsaker</h1>
+    <p>
+      Check out my <Link href="https://github.com/jalvsaker">
+        Github
+        <Icon name="mdi:github" class="inline text-xl" />
+      </Link>
+    </p>
+    <h2 class="text-xl">Check out some of my projects:</h2>
+    <ul class="list-disc">
+      {
+        projects.map((p) => (
+          <li class="my-1">
+            <Link href={p.link}>{p.name}</Link>
+            <Link href={p.repo}>
+              <Icon
+                name="mdi:github"
+                class="inline align-top text-2xl"
+                title="Github repo"
+              />
+            </Link>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </Layout>
