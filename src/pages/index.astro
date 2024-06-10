@@ -3,6 +3,19 @@ import Link from "../components/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 
+const socials = [
+  {
+    name: "Github",
+    link: "https://github.com/jalvsaker",
+    icon: "mdi:github",
+  },
+  {
+    name: "Linkedin",
+    link: "https://www.linkedin.com/in/jens-aalbu-alvsaker/",
+    icon: "mdi:linkedin",
+  },
+];
+
 const projects = [
   {
     name: "Departure-board",
@@ -27,12 +40,13 @@ const projects = [
     <Icon name="mdi:terminal" class="text-8xl" />
     <h1 class="text-2xl font-semibold">Jens Aalbu Alvsåker</h1>
     <div class="flex gap-2">
-      <Link href="https://github.com/jalvsaker">
-        <Icon name="mdi:github" class="inline text-3xl" />
-      </Link>
-      <Link href="https://www.linkedin.com/in/jens-aalbu-alvsaker/">
-        <Icon name="mdi:linkedin" class="inline text-3xl" />
-      </Link>
+      {
+        socials.map((s) => (
+          <Link href={s.link} aria-label={s.name + " link"}>
+            <Icon name={s.icon} class="inline text-3xl" />
+          </Link>
+        ))
+      }
     </div>
     <h2 class="text-xl">Check out some of my projects:</h2>
     <ul class="list-disc">
@@ -40,12 +54,8 @@ const projects = [
         projects.map((p) => (
           <li class="my-1">
             <Link href={p.link}>{p.name}</Link>
-            <Link href={p.repo}>
-              <Icon
-                name="mdi:github"
-                class="inline align-top text-2xl"
-                title="Github repo"
-              />
+            <Link href={p.repo} aria-label="Github repo">
+              <Icon name="mdi:github" class="inline align-top text-2xl" />
             </Link>
           </li>
         ))
